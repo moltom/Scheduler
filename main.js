@@ -10,7 +10,10 @@ let addWindow;
 //Listen for app ready
 app.on('ready', function () {
     //Create new window
-    mainWindow = new BrowserWindow({});
+    mainWindow = new BrowserWindow({
+        width: 1100,
+        height: 750
+    });
 
     //Load HTML into window
     mainWindow.loadURL(url.format({

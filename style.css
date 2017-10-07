@@ -1,17 +1,15 @@
-.filler {
-    border: none;
-}
-
 #main{
     display: inline-block;
     *display: inline;
-    width: 70%;
+    width: 600px;
+    height: 400px;
 }
 
 #column{
     display: inline-block;
     *display: inline;
-    width: 30%;
+    width: 200px;
+    height: 400px;
 }
 
 /*------BEGIN TABLE-------*/
@@ -27,13 +25,28 @@
     padding: 5px;
 }
 
+/* - Header - */
 #time_table thead tr:first-child{
+    font-size: 14px;
+}
+#time_table thead tr:first-child th:first-child{
+    border: none;
+}
+
+#time_table thead tr:nth-child(n+2) th:nth-child(-n+2){
+    font-size: 14px;
+}
+
+#time_table thead tr:nth-child(n+2) th:nth-child(n+3){
+    font-size: 12px;
+}
+
+/* - Body - */
+#time_table tbody th:nth-child(n+3){
+    width: 125px;
     font-size: 75%;
 }
 
-
-
-/* First two columns */
 #time_table tbody th:nth-child(-n+2) {
     width: 45px;
 }
@@ -41,12 +54,6 @@
 #time_table tbody td:nth-child(-n+2) {
     width: 45px;
     font-size: 100%;
-}
-
-/* All other columns */
-#time_table tbody th:nth-child(n+3){
-    width: 125px;
-    font-size: 75%;
 }
 
 #time_table tbody td:nth-child(n+3){
