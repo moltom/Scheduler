@@ -1,0 +1,65 @@
+.filler {
+    border: none;
+}
+
+#main{
+    display: inline-block;
+    *display: inline;
+    width: 70%;
+}
+
+#column{
+    display: inline-block;
+    *display: inline;
+    width: 30%;
+}
+
+/*------BEGIN TABLE-------*/
+#time_table{
+    border-collapse: collapse;
+    border: none;
+}
+
+#time_table td,
+#time_table th {
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 5px;
+}
+
+#time_table thead tr:first-child{
+    font-size: 75%;
+}
+
+
+
+/* First two columns */
+#time_table tbody th:nth-child(-n+2) {
+    width: 45px;
+}
+
+#time_table tbody td:nth-child(-n+2) {
+    width: 45px;
+    font-size: 100%;
+}
+
+/* All other columns */
+#time_table tbody th:nth-child(n+3){
+    width: 125px;
+    font-size: 75%;
+}
+
+#time_table tbody td:nth-child(n+3){
+    width: 125px;
+    font-size: 75%;
+}
+
+/*------Student List------*/
+#students{
+    border: none;
+}
+
+html *
+{
+    font-family:"Arial";
+}

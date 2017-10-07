@@ -1,0 +1,7 @@
+* Way to set preferred nicknames
+* Load student list and edit list in window
+
+Options:
+- What instructors are there?
+    - Names, instruments, Private?
+-

@@ -1,0 +1,107 @@
+#grid_lay{
+    margin: auto;
+    padding: 15px;
+}
+
+#grid_lay td, #grid_lay th{
+    padding: 5px;
+    margin: auto;
+}
+
+.box {
+    border: 2px solid #000;
+    width: 350px;
+    height: 310px;
+}
+
+.sub_box {
+    border-top: none;
+    border-bottom: none;
+}
+
+.title {
+    padding-top: 4px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.name {
+    padding-top: 5px;
+    padding-bottom: 10px;
+    margin: auto;
+    width: 90%;
+}
+
+.name th {
+    font-size: 90%;
+}
+
+.name td {
+    border: 1px solid #000;
+    text-align: center;
+    padding: 5px;
+}
+
+.time{
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    width:95%;
+    margin: auto;
+    text-align: center;
+}
+
+.time td {
+    padding: 6px;
+    border: 1px solid #ddd;
+}
+
+.time th {
+    font-size: 90%;
+    border: 1px solid #ddd;
+}
+
+.foot{
+    padding: 10px;
+    margin: auto;
+}
+
+.instructor{
+    padding: 1px;
+    margin: auto;
+    text-align: center;
+    font-size: 13px;
+}
+
+.sig {
+    width: 90%;
+    margin: auto;
+    padding: 5px;
+}
+
+.inst_name{
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
+    font-size: 90%;
+}
+
+.sig-box {
+    display: inline-block;
+    *display: inline;
+    border: 1px solid #000;
+    vertical-align: middle;
+    width: 200px;
+    height: 38px;
+}
+
+.notes{
+    margin: auto;
+    padding: 8px;
+    text-align: center;
+    font-size: 80%;
+}
+
+html *
+{
+    font-family:"Arial";
+}
