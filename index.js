@@ -1,7 +1,3 @@
-//var button = document.createElement('button')
-//button.textContent = 'Open Window'
-//document.body.appendChild(button)
-
 const electron = require('electron');
 const {ipcRenderer} = electron
 const ul = document.querySelector('ul');

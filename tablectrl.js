@@ -1,0 +1,151 @@
+
+/*
+----------KEY-----------
+#B_   = Filler/Blank of...
+#S_   = Row span of num
+#CTAG = Cover row w/ tag
+#RTAG = Cover cell w/ tag
+
+ */
+
+const log = require("util").log;
+var ex_layout = [
+    ["", "", "Day 1", "Day 2", "Day 3"],
+    ["Period", "Time", "Wednesday June 11th", "Thursday June 12th", "Friday June 13th"],
+    ["Before", "7:05", "Name 1", "Name 2", "Name 3"],
+    ["1", "7:25", "#CVarsity Band"],
+    ["#S32", "8:20", "Name 4", "Name 5", "Name 6"],
+    ["#B", "8:35", "Name 7", "Name 8", "Name 9"],
+    ["#B", "8:50", "Name 10", "Name 11", "Name 12"]
+];
+
+var layout = [
+    ["BLANK"],
+    ["Period", "Time"]
+];
+
+
+window.onload = function() {
+    createTimeTable(ex_layout);
+};
+
+/**
+ * Function to get the operator and contents of a cell
+ * @param content A string of the cell contents
+ * @returns {Array} as {Operator, Contents}; Returns blanks if cell is empty
+ */
+function getCellInfo(content){
+    if (content.length >= 2) {
+        let oper = content.substring(0,2);
+        let OP, CONT;
+        if (oper.charAt(0) === "#") {
+            switch (oper.charAt(1)) {
+                case "B":
+                    OP = content.substring(1,3);
+                    CONT = content.substring(3);
+                    break;
+                case "S":
+                    OP = content.substring(1,3);
+                    CONT = content.substring(3);
+                    break;
+                case "C":
+                    OP = "C";
+                    CONT = content.substring(2);
+                    break;
+                case "R":
+                    OP = "R";
+                    CONT = content.substring(2);
+                    break;
+                default:
+                    OP = "";
+                    CONT = "";
+                    break;
+            }
+            return [OP, CONT];
+        }
+    }
+    return ["", content];
+}
+
+function formatDate(text){
+    let spIndex = text.indexOf(" ");
+    let day = text.substring(0, spIndex);
+    let rest = text.substring(spIndex+1);
+    return [day, rest];
+}
+
+function createTable(tableData) {
+    var table = document.createElement('table');
+    var tableBody = document.createElement('tbody');
+
+    tableData.forEach(function(rowData) {
+        var row = document.createElement('tr');
+
+        rowData.forEach(function(cellData) {
+            var cell = document.createElement('td');
+            cell.appendChild(document.createTextNode(cellData));
+            row.appendChild(cell);
+        });
+
+        tableBody.appendChild(row);
+    });
+
+    table.appendChild(tableBody);
+    document.body.appendChild(table);
+}
+
+function createTimeTable(tableData) {
+    let table = document.getElementById("time_table");
+    let tableHead = document.createElement('thead');
+    let tableBody = document.createElement('tbody');
+
+    for(r = 0;r < tableData.length;r++){
+        let row = document.createElement('tr');
+        for(c = 0; c < tableData[r].length;c++){
+            //Get Cell Info
+            let cellData = getCellInfo(tableData[r][c]);
+
+            //Initial cell elements and text
+            let elem = (r < 2) ? 'th' : 'td';
+            let cell = document.createElement(elem);
+
+            if(r === 1 && c > 1){
+                let dateInfo = formatDate(cellData[1]);
+                cell.appendChild(document.createTextNode(dateInfo[0]));
+                cell.appendChild(document.createElement("br"));
+                cell.appendChild(document.createTextNode(dateInfo[1]));
+            }
+            else{
+                cell.appendChild(document.createTextNode(cellData[1]));
+            }
+
+            //Attributes
+            switch(cellData[0].charAt(0)) {
+                case "B":
+                    if (cellData[0].length > 1)
+                        cell.colSpan = Number(cellData[0].charAt(1));
+                    cell.setAttribute("class", "filler");
+                    break;
+                case "S":
+                    cell.rowSpan = Number(cellData[0].charAt(1));
+                    break;
+                case "C":
+                    cell.colSpan = tableData[0].length - 1;
+                    cell.setAttribute("class", "cover");
+                    break;
+                case "R":
+                    cell.setAttribute("class", "cover");
+                    break;
+            }
+
+            row.appendChild(cell);
+        }
+        if (r < 2)
+            tableHead.appendChild(row);
+        else
+            tableBody.appendChild(row);
+    }
+
+    table.appendChild(tableHead);
+    table.appendChild(tableBody);
+}
