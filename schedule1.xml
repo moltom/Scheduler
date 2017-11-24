@@ -1,0 +1,450 @@
+<schedule>
+    <time_table>
+        <day date="Monday Sept. 11th">
+            <period label = "Before" border = "bottom">
+                <time ptime = "7:05">
+                    <name>Hello</name>
+                </time>
+            </period>
+            <period label="1">
+                <time ptime="7:25">
+                    <cover>Prep</cover>
+                </time>
+            </period>
+            <period label="2">
+                <time ptime="8:20">
+                    <name>Miriam Lebowitz</name>
+                </time>
+                <time ptime="8:35">
+                    <name>Joseph Reardon</name>
+                </time>
+                <time ptime="8:50">
+                    <name>Quenton Steffen</name>
+                </time>
+            </period>
+            <period label="PAWS">
+                <time ptime="9:09">
+                    <cover>PAWS</cover>
+                </time>
+            </period>
+            <period label="3">
+                <time ptime="9:29">
+                    <cover>VARSITY BAND</cover>
+                </time>
+            </period>
+            <period label="4">
+                <time ptime="10:20">
+                    <name>Marissa Amerongen</name>
+                </time>
+                <time ptime="10:35">
+                    <name>Hannah Burns</name>
+                </time>
+                <time ptime="10:50">
+                    <name>Nicholas Corcoran</name>
+                </time>
+            </period>
+            <period label="5">
+                <time ptime="11:11">
+                    <cover>FRESHMAN BAND</cover>
+                </time>
+            </period>
+            <period label="Lunch">
+                <time ptime="12:06">
+                    <cover>VARSITY BAND</cover>
+                </time>
+            </period>
+            <period label="6">
+                <time ptime="12:36">
+                    <cover>Department Coordinator</cover>
+                </time>
+            </period>
+            <period label="7">
+                <time ptime="1:30">
+                    <name></name>
+                </time>
+                <time ptime="1:45">
+                    <name></name>
+                </time>
+                <time ptime="2:00">
+                    <name></name>
+                </time>
+            </period>
+            <period label="After" border = "top">
+                <time ptime="2:20">
+                    <name></name>
+                </time>
+                <time ptime="2:35">
+                    <name></name>
+                </time>
+            </period>
+        </day>
+
+        <day date="Monday Sept. 11th">
+            <period label = "Before" border = "bottom">
+                <time ptime = "7:05">
+                    <name></name>
+                </time>
+            </period>
+            <period label="1">
+                <time ptime="7:25">
+                    <cover>Prep</cover>
+                </time>
+            </period>
+            <period label="2">
+                <time ptime="8:20">
+                    <name></name>
+                </time>
+                <time ptime="8:35">
+                    <name></name>
+                </time>
+                <time ptime="8:50">
+                    <name></name>
+                </time>
+            </period>
+            <period label="PAWS">
+                <time ptime="9:09">
+                    <cover>PAWS</cover>
+                </time>
+            </period>
+            <period label="3">
+                <time ptime="9:29">
+                    <cover>VARSITY BAND</cover>
+                </time>
+            </period>
+            <period label="4">
+                <time ptime="10:20">
+                    <name>Kalani Eisele</name>
+                </time>
+                <time ptime="10:35">
+                    <name>Mya Hillerud</name>
+                </time>
+                <time ptime="10:50">
+                    <name>Malia Horgen</name>
+                </time>
+            </period>
+            <period label="5">
+                <time ptime="11:11">
+                    <cover>FRESHMAN BAND</cover>
+                </time>
+            </period>
+            <period label="Lunch">
+                <time ptime="12:06">
+                    <cover>VARSITY BAND</cover>
+                </time>
+            </period>
+            <period label="6">
+                <time ptime="12:36">
+                    <cover>Department Coordinator</cover>
+                </time>
+            </period>
+            <period label="7">
+                <time ptime="1:30">
+                    <name>Brynn Kamarainen</name>
+                </time>
+                <time ptime="1:45">
+                    <name>Nathan Lee</name>
+                </time>
+                <time ptime="2:00">
+                    <name>Elizabeth Moon</name>
+                </time>
+            </period>
+            <period label="After" border = "top">
+                <time ptime="2:20">
+                    <name></name>
+                </time>
+                <time ptime="2:35">
+                    <name></name>
+                </time>
+            </period>
+        </day>
+    </time_table>
+
+    <student_list>
+        <grade year="9">
+            <student>
+                <name>Eric Patton</name>
+                <year>9</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Chase Ruocco</name>
+                <year>9</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>David Sethney</name>
+                <year>9</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Charles Steffen</name>
+                <year>9</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Brad Stricker</name>
+                <year>9</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Thomas Valusek</name>
+                <year>9</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+        </grade>
+
+        <grade year="10">
+            <student>
+                <name>Ella Johnson-Odegard</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Justin Korah</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Micah Maddio</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Michael Marshall</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Gabriel Khattak</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Reagan Nguyen</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Ethan Harcourt</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Lucas Hobbs</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Zachary Jacobson</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Rishabh Bhattacharya</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Daniel Biancamano</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Gerome Coralde</name>
+                <year>10</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+        </grade>
+
+        <grade year="11">
+            <student>
+                <name>Allison Diaz</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Miles Drugge</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Araon Figura</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Victoria James</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Claire Madden</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Anna Schnuckle</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Zachary Schulte</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Sophie Stein</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Ava Thrawl</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Preston Wehrman</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Christine Demarchis</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Ashleigh Erickson</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Katie Huisman</name>
+                <year>11</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+        </grade>
+        <grade year="12">
+            <student>
+                <name>Ayush Patel</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Wyatt Baillif</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Jacob Berran</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Brynn Kamarainen</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Nathan Lee</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Elizabeth Moon</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Kalani Eisele</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Mya Hillerud</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Malia Horgen</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Miriam Lebowitz</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Joseph Reardon</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Quenton Steffen</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Marissa Amerongen</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Hannah Burns</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+            <student>
+                <name>Nicholas Corcoran</name>
+                <year>12</year>
+                <instrument>Percussion</instrument>
+                <instructor>Brett Benson</instructor>
+            </student>
+        </grade>
+    </student_list>
+</schedule>

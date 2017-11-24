@@ -8,6 +8,7 @@
   "dependencies": {
     "electron": "^1.7.8",
     "menu": "^0.2.5",
-    "remote": "^0.2.6"
+    "remote": "^0.2.6",
+    "xml2js": "^0.4.19"
   }
 }

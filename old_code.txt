@@ -1,37 +1,23 @@
-const fs = require('fs');
-const log = require("util").log;
-const xml2js = require('xml2js');
-const parser = new xml2js.Parser();
-/*
-----------KEY-----------
-#B_   = Filler/Blank of...
-#S_   = Row span of num
-#CTAG = Cover row w/ tag
-#RTAG = Cover cell w/ ta
- */
+function createTable(tableData) {
+    var table = document.createElement('table');
+    var tableBody = document.createElement('tbody');
 
-//const log = require("util").log;
-var ex_layout = [
-    ["", "", "Day 1", "Day 2", "Day 3"],
-    ["Period", "Time", "Wednesday June 11th", "Thursday June 12th", "Friday June 13th"],
-    ["Before", "7:05", "Name 1", "Name 2", "Name 3"],
-    ["1", "7:25", "#CVarsity Band"],
-    ["#S32", "8:20", "Name 4", "Name 5", "Name 6"],
-    ["#B", "8:35", "Name 7", "Name 8", "Name 9"],
-    ["#B", "8:50", "Name 10", "Name 11", "Name 12"]
-];
+    tableData.forEach(function(rowData) {
+        var row = document.createElement('tr');
 
+        rowData.forEach(function(cellData) {
+            var cell = document.createElement('td');
+            cell.appendChild(document.createTextNode(cellData));
+            row.appendChild(cell);
+        });
 
-window.onload = function() {
-    createTimeTable(ex_layout);
-    loadXML();
-};
+        tableBody.appendChild(row);
+    });
 
-/**
- * Function to get the operator and contents of a cell
- * @param content A string of the cell contents
- * @returns {Array} as {Operator, Contents}; Returns blanks if cell is empty
- */
+    table.appendChild(tableBody);
+    document.body.appendChild(table);
+}
+
 function getCellInfo(content){
     if (content.length >= 2) {
         let oper = content.substring(0,2);
@@ -72,7 +58,7 @@ function formatDate(text){
     return [day, rest];
 }
 
-function createTimeTable(xmldata) {
+function createTimeTable(tableData) {
     let table = document.getElementById("time_table");
     let tableHead = document.createElement('thead');
     let tableBody = document.createElement('tbody');
@@ -126,13 +112,4 @@ function createTimeTable(xmldata) {
 
     table.appendChild(tableHead);
     table.appendChild(tableBody);
-}
-
-//-----File Utility-----
-function loadXML(file_name){
-    fs.readFile(file_name, function(err,data){
-        parser.parseString(data,function(err,result){
-            return result;
-        });
-    });
 }
