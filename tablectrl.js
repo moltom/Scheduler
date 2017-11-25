@@ -9,6 +9,7 @@ window.onload = function() {
     loadXML("schedule1.xml", function(contents){
         //console.log(typeof contents);
         createTimeTable(contents);
+        createStudentList(contents);
     });
 };
 
@@ -144,6 +145,43 @@ function createTimeTable(file){
     }
     table.appendChild(tableHead);
     table.appendChild(tableBody);
+}
+
+function createStudentList(file){
+	let table = document.getElementById("stu_list");
+	let body = document.createElement('tbody');
+
+	//Get time table xml data
+	let xml = file.getElementsByTagName("student_list")[0];
+    let grades = xml.getElementsByTagName("grade");
+
+    for(let gi = 0; gi < grades.length; gi++){
+        let students = grades[gi].getElementsByTagName("student");
+
+        //Add grade header
+        let ghRow = document.createElement("tr");
+        let ghInner = document.createElement("th");
+        let label = grades[gi].getAttribute("year") + "th Grade";
+        ghInner.appendChild(document.createTextNode(label));
+        ghRow.appendChild(ghInner);
+        body.appendChild(ghRow);
+
+        for(let si = 0; si < students.length; si++){
+            //Create table elements
+            let sRow = document.createElement("tr");
+            let data = document.createElement("td");
+
+            //Get student name
+            let stu_name = students[si].getElementsByTagName("name")[0].innerHTML;
+
+            //Add elements to table
+            data.appendChild(document.createTextNode(stu_name));
+            sRow.appendChild(data);
+            body.appendChild(sRow);
+        }
+    }
+
+    table.appendChild(body);
 }
 
 //-----File Utility-----
