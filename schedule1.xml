@@ -3,7 +3,7 @@
         <day date="Monday Sept. 11th">
             <period label = "Before" border = "bottom">
                 <time ptime = "7:05">
-                    <name>Hello</name>
+                    <name></name>
                 </time>
             </period>
             <period label="1">

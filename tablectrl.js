@@ -1,70 +1,18 @@
 const fs = require('fs');
-const log = require("util").log;
 const xml2js = require('xml2js');
-const parser = new xml2js.Parser();
-/*
-----------KEY-----------
-#B_   = Filler/Blank of...
-#S_   = Row span of num
-#CTAG = Cover row w/ tag
-#RTAG = Cover cell w/ ta
- */
+//const parser = new xml2js.Parser();
+parser = new DOMParser();
 
-//const log = require("util").log;
-var ex_layout = [
-    ["", "", "Day 1", "Day 2", "Day 3"],
-    ["Period", "Time", "Wednesday June 11th", "Thursday June 12th", "Friday June 13th"],
-    ["Before", "7:05", "Name 1", "Name 2", "Name 3"],
-    ["1", "7:25", "#CVarsity Band"],
-    ["#S32", "8:20", "Name 4", "Name 5", "Name 6"],
-    ["#B", "8:35", "Name 7", "Name 8", "Name 9"],
-    ["#B", "8:50", "Name 10", "Name 11", "Name 12"]
-];
-
-
+//Main function
 window.onload = function() {
-    createTimeTable(ex_layout);
-    loadXML();
+    //createTimeTable();
+    loadXML("schedule1.xml", function(contents){
+        //console.log(typeof contents);
+        createTimeTable(contents);
+    });
 };
 
-/**
- * Function to get the operator and contents of a cell
- * @param content A string of the cell contents
- * @returns {Array} as {Operator, Contents}; Returns blanks if cell is empty
- */
-function getCellInfo(content){
-    if (content.length >= 2) {
-        let oper = content.substring(0,2);
-        let OP, CONT;
-        if (oper.charAt(0) === "#") {
-            switch (oper.charAt(1)) {
-                case "B":
-                    OP = content.substring(1,3);
-                    CONT = content.substring(3);
-                    break;
-                case "S":
-                    OP = content.substring(1,3);
-                    CONT = content.substring(3);
-                    break;
-                case "C":
-                    OP = "C";
-                    CONT = content.substring(2);
-                    break;
-                case "R":
-                    OP = "R";
-                    CONT = content.substring(2);
-                    break;
-                default:
-                    OP = "";
-                    CONT = "";
-                    break;
-            }
-            return [OP, CONT];
-        }
-    }
-    return ["", content];
-}
-
+//Date formatter
 function formatDate(text){
     let spIndex = text.indexOf(" ");
     let day = text.substring(0, spIndex);
@@ -72,67 +20,136 @@ function formatDate(text){
     return [day, rest];
 }
 
-function createTimeTable(xmldata) {
+function getChildIndexOf(child){
+    return [].indexOf.call(child.parentNode.children, child);
+}
+
+function createTimeTable(file){
     let table = document.getElementById("time_table");
     let tableHead = document.createElement('thead');
     let tableBody = document.createElement('tbody');
 
-    for(r = 0;r < tableData.length;r++){
-        let row = document.createElement('tr');
-        for(c = 0; c < tableData[r].length;c++){
-            //Get Cell Info
-            let cellData = getCellInfo(tableData[r][c]);
+    //Get time table xml data
+    let xml = file.getElementsByTagName("time_table")[0];
 
-            //Initial cell elements and text
-            let elem = (r < 2) ? 'th' : 'td';
-            let cell = document.createElement(elem);
+    //Get table specifications
+    let daysNL = xml.getElementsByTagName("day");
+    let width = daysNL.length + 2; // 2 for period and time on left
+    let height = daysNL[0].getElementsByTagName("time").length + 2; // 2 for date and day on top
 
-            if(r === 1 && c > 1){
-                let dateInfo = formatDate(cellData[1]);
-                cell.appendChild(document.createTextNode(dateInfo[0]));
-                cell.appendChild(document.createElement("br"));
-                cell.appendChild(document.createTextNode(dateInfo[1]));
+
+    console.log("Table height: " + height);
+
+
+    for(let row = 0;row < height;row++){
+        //Create new row object
+        let table_row = document.createElement("tr");
+        for (let col = 0;col < width;col++){
+            //Determine if element should be table head or table data
+            let cell = document.createElement( (row < 2) ? 'th' : 'td' );
+
+            //Setup first row
+            if(row === 0){
+                if(col < 2) // Spacing
+                    cell.appendChild(document.createTextNode(""));
+                else // Day #
+                    cell.appendChild(document.createTextNode("Day " + (col - 1)))
             }
+
+            //Setup second row
+            else if(row === 1){
+                switch(col){
+                    case 0:
+                        cell.appendChild(document.createTextNode("Period"));
+                        break;
+                    case 1:
+                        cell.appendChild(document.createTextNode("Time"));
+                        break;
+                    default:
+                        //Get date info from node list of days in XML
+                        let dateInfo = formatDate(daysNL[col - 2].getAttribute("date"));
+                        cell.appendChild(document.createTextNode(dateInfo[0]));
+                        cell.appendChild(document.createElement("br"));
+                        cell.appendChild(document.createTextNode(dateInfo[1]));
+                        break;
+                }
+            }
+
+            //All other cells
             else{
-                cell.appendChild(document.createTextNode(cellData[1]));
-            }
+	            let times = daysNL[0].getElementsByTagName("time");
+	            let index = row - 2;
+	            switch(col){
+                    //Period
+                    case 0:
+                        //Check time element's index within parent node
+                        if (getChildIndexOf(times[index]) === 0) {
+	                        let parentPeriod = times[index].parentNode;
+                            //Get period label from parent
+	                        let label = parentPeriod.getAttribute("label");
+	                        cell.appendChild(document.createTextNode(label));
 
-            //Attributes
-            switch(cellData[0].charAt(0)) {
-                case "B":
-                    if (cellData[0].length > 1)
-                        cell.colSpan = Number(cellData[0].charAt(1));
-                    cell.setAttribute("class", "filler");
-                    break;
-                case "S":
-                    cell.rowSpan = Number(cellData[0].charAt(1));
-                    break;
-                case "C":
-                    cell.colSpan = tableData[0].length - 1;
-                    cell.setAttribute("class", "cover");
-                    break;
-                case "R":
-                    cell.setAttribute("class", "cover");
-                    break;
+	                        //Check if rowSpan is needed in period nodes
+	                        let tlength = parentPeriod.getElementsByTagName("time").length;
+	                        if(tlength > 1)
+                                cell.rowSpan = tlength;
+                        }
+                        //Filling if rowSpan exists
+                        else {
+                            //cell.appendChild(document.createTextNode("yep"));
+	                        cell.setAttribute("class", "filler");
+                        }
+                        break;
+                    //Time
+                    case 1:
+                        //Get lesson time label
+                        let label = times[index].getAttribute("ptime");
+                        cell.appendChild(document.createTextNode(label));
+                        break;
+                    //Student info
+                    default:
+                        //Check tag
+                        let tag = times[index].firstElementChild.tagName;
+                        if (tag === "name"){
+	                        //Add names
+	                        let names = times[index].getElementsByTagName("name");
+	                        for(let i = 0;i < names.length;i++){
+		                        cell.appendChild(document.createTextNode(names[i].innerHTML));
+		                        if(i < names.length - 1)
+			                        cell.appendChild(document.createElement("br"));
+	                        }
+                        }
+                        else if(tag === "cover"){
+                            if(col === 2){
+	                            let coverTag = times[index].firstElementChild.innerHTML;
+	                            cell.appendChild(document.createTextNode(coverTag));
+	                            cell.colSpan = daysNL.length;
+	                            cell.setAttribute("class", "cover");
+                            }
+                            else
+                                cell.setAttribute("class", "filler");
+                        }
+                        break;
+                }
             }
-
-            row.appendChild(cell);
+            //Finalize row
+            table_row.appendChild(cell);
         }
-        if (r < 2)
-            tableHead.appendChild(row);
-        else
-            tableBody.appendChild(row);
-    }
 
+        //Add rows to head and body
+        if(row < 2)
+            tableHead.appendChild(table_row);
+        else
+            tableBody.appendChild(table_row);
+    }
     table.appendChild(tableHead);
     table.appendChild(tableBody);
 }
 
 //-----File Utility-----
-function loadXML(file_name){
+function loadXML(file_name, callback){
     fs.readFile(file_name, function(err,data){
-        parser.parseString(data,function(err,result){
-            return result;
-        });
+        let value = parser.parseFromString(data.toString(), "text/xml");
+        callback(value);
     });
 }
