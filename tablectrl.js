@@ -38,10 +38,6 @@ function createTimeTable(file){
     let width = daysNL.length + 2; // 2 for period and time on left
     let height = daysNL[0].getElementsByTagName("time").length + 2; // 2 for date and day on top
 
-
-    console.log("Table height: " + height);
-
-
     for(let row = 0;row < height;row++){
         //Create new row object
         let table_row = document.createElement("tr");
@@ -113,7 +109,8 @@ function createTimeTable(file){
                         let tag = times[index].firstElementChild.tagName;
                         if (tag === "name"){
 	                        //Add names
-	                        let names = times[index].getElementsByTagName("name");
+                            let live_times = daysNL[col - 2].getElementsByTagName("time");
+	                        let names = live_times[index].getElementsByTagName("name");
 	                        for(let i = 0;i < names.length;i++){
 		                        cell.appendChild(document.createTextNode(names[i].innerHTML));
 		                        if(i < names.length - 1)

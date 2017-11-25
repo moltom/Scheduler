@@ -8,7 +8,7 @@
             </period>
             <period label="1">
                 <time ptime="7:25">
-                    <cover>Prep</cover>
+                    <cover>PREP</cover>
                 </time>
             </period>
             <period label="2">
@@ -50,7 +50,7 @@
             </period>
             <period label="Lunch">
                 <time ptime="12:06">
-                    <cover>VARSITY BAND</cover>
+                    <cover>LUNCH</cover>
                 </time>
             </period>
             <period label="6">
@@ -87,7 +87,7 @@
             </period>
             <period label="1">
                 <time ptime="7:25">
-                    <cover>Prep</cover>
+                    <cover>PREP</cover>
                 </time>
             </period>
             <period label="2">
@@ -129,7 +129,7 @@
             </period>
             <period label="Lunch">
                 <time ptime="12:06">
-                    <cover>VARSITY BAND</cover>
+                    <cover>LUNCH</cover>
                 </time>
             </period>
             <period label="6">
