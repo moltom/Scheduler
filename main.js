@@ -4,34 +4,82 @@ const path = require('path');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
-let mainWindow;
+let scheduleWindow;
 let addWindow;
+let menu;
 
 //Listen for app ready
 app.on('ready', function () {
-    //Create new window
-    mainWindow = new BrowserWindow({
-        width: 1100,
-        height: 750
-    });
-
-    //Load HTML into window
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
-    //Quit app when closed
-    mainWindow.on('closed', function(){
-        app.quit();
-    });
-
-    //Build menu from template
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
-    //Insert menu
-    Menu.setApplicationMenu(mainMenu);
+	createMenu();
 });
+
+ipcMain.on('file:loaded', function(){
+	createScheduleWindow();
+	menu.close();
+});
+
+ipcMain.on('open', function(){
+	testWindow();
+});
+
+ipcMain.on('print', function(event, arg){
+	console.log(arg);
+});
+
+let test;
+function testWindow(){
+	test = new BrowserWindow({
+		width: 500,
+		height: 600
+	});
+}
+
+//Generate Menu Window
+function createMenu(){
+	menu = new BrowserWindow({
+		width: 400,
+		height: 400
+	});
+
+	menu.loadURL(url.format({
+		pathname: path.join(__dirname, 'Menu/menu.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
+
+	/*
+	//Quit app when closed
+	menu.on('closed', function(){
+		app.quit();
+	});*/
+
+	//Build menu from template
+	const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
+	//Insert menu
+	Menu.setApplicationMenu(mainMenu);
+}
+
+//Generate schedule window
+function createScheduleWindow(){
+	//Create new window
+	scheduleWindow = new BrowserWindow({
+		width: 1100,
+		height: 750
+	});
+
+	//Load HTML into window
+	scheduleWindow.loadURL(url.format({
+		pathname: path.join(__dirname, 'index.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
+
+	//Quit app when closed
+	/*
+	scheduleWindow.on('closed', function(){
+		app.quit();
+	});*/
+}
 
 //Handle add window
 function createAddWindow(){
@@ -58,7 +106,7 @@ function createAddWindow(){
 // Catch Item Add
 ipcMain.on('item:add',function(e, item){
     console.log(item);
-    mainWindow.webContents.send('item:add', item);
+    scheduleWindow.webContents.send('item:add', item);
     addWindow.close();
 });
 
@@ -68,7 +116,7 @@ const mainMenuTemplate = [
         submenu:[
             {
                 label: 'Quit',
-                accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+                accelerator: process.platform === 'darwin' ? 'Command+Q' : 'Ctrl+Q',
                 click(){
                     app.quit();
                 }
@@ -79,23 +127,38 @@ const mainMenuTemplate = [
         label:'File',
         submenu:[
             {
-                label: 'Add Item',
-                accelerator: process.platform == 'darwin' ? 'Command+N' : 'Ctrl+N',
+                label: 'New Schedule',
+                accelerator: process.platform === 'darwin' ? 'Command+N' : 'Ctrl+N',
                 click(){
-                    createAddWindow();
+                    //Create new Schedule
                 }
             },
             {
-                label: 'Clear Items'
+                label: 'Open Schedule',
+                accelerator: process.platform === 'darwin' ? 'Command+O' : 'Ctrl+O',
+                click(){
+                    createScheduleWindow();
+                }
             }
         ]
     },
-    {
+    { //View
+        label: 'View',
+        submenu: [
+            {
+                label: 'View Ex. Pass',
+                click(){
+                    createAddWindow();
+                }
+            }
+        ]
+    },
+    { //Help
         label:'Help',
         submenu:[
             {
                 label:'Dev Tools',
-                accelerator:process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+                accelerator:process.platform === 'darwin' ? 'Command+I' : 'Ctrl+I',
                 click(item, focusedWindow){
                     focusedWindow.toggleDevTools();
                 }

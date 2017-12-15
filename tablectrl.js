@@ -1,13 +1,10 @@
 const fs = require('fs');
-const xml2js = require('xml2js');
-//const parser = new xml2js.Parser();
 parser = new DOMParser();
 
 //Main function
 window.onload = function() {
-    //createTimeTable();
-    loadXML("schedule1.xml", function(contents){
-        //console.log(typeof contents);
+	openXMLFile(function(contents){
+    //loadXML("schedule1.xml", function(contents){
         createTimeTable(contents);
         createStudentList(contents);
     });
@@ -182,9 +179,25 @@ function createStudentList(file){
 }
 
 //-----File Utility-----
+const {dialog} = require('electron').remote;
+
 function loadXML(file_name, callback){
     fs.readFile(file_name, function(err,data){
         let value = parser.parseFromString(data.toString(), "text/xml");
         callback(value);
     });
+}
+
+function openXMLFile(callback){
+	dialog.showOpenDialog((files) => {
+		if (files === undefined){
+			console.log("No file selected!");
+			return;
+		}
+
+		fs.readFile(files[0], function(err,data){
+			let value = parser.parseFromString(data.toString(), "text/xml");
+			callback(value);
+		});
+	});
 }

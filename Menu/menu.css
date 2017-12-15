@@ -1,0 +1,52 @@
+* {
+    font-family: "Arial";
+    margin: auto;
+    text-align: center;
+    padding: 0px;
+    user-select: none;
+    cursor: default;
+}
+
+h2{
+    font-size: 20px;
+    padding: 10px;
+    margin: auto;
+}
+
+#new{
+    background-color: whitesmoke;
+    padding: 5px;
+    width: 50%;
+    margin: 5px auto;
+}
+
+#new:hover{
+    background-color: #cecece;
+}
+
+#load{
+    background-color: whitesmoke;
+    padding: 5px;
+    width: 50%;
+    margin: 5px auto;
+}
+
+#load:hover{
+    background-color: #cecece;
+}
+
+#open{
+    background-color: whitesmoke;
+    padding: 5px;
+    width: 50%;
+    margin: 5px auto;
+}
+
+#open:hover{
+    background-color: #cecece;
+}
+
+#container{
+    width: 400px;
+    margin: auto;
+}
