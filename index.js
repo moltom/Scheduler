@@ -1,24 +1,67 @@
-/*
 const electron = require('electron');
 const {ipcRenderer} = electron;
-const ul = document.querySelector('ul');
+const remote = require('electron').remote;
+/*const ul = document.querySelector('ul');
 //Catch webcontents send using IPC Render
 ipcRenderer.on('item:add', function(e, item){
     const li = document.createElement('li');
     const itemText = document.createTextNode(item);
     li.appendChild(itemText);
     ul.appendChild(li);
-});
-*/
+});*/
 
-//TABLE CONTROL
+let xmlfile;
+
 window.onload = function() {
-	console.log("File contents (within index): " + window.fileContents);
-	createTimeTable(window.fileContents);
-	createStudentList(window.fileContents);
+	openXMLFile(function(contents){
+		ipcRenderer.send('show');
+		createTimeTable(contents);
+		createStudentList(contents);
+		xmlfile = contents;
+	});
 };
 
-//Date formatter
+//-----File Utility-----
+const {dialog} = require('electron').remote;
+const fs = require('fs');
+parser = new DOMParser();
+
+function loadXML(file_name, callback){
+	fs.readFile(file_name, function(err,data){
+		let value = parser.parseFromString(data.toString(), "text/xml");
+		callback(value);
+	});
+}
+
+function openXMLFile(callback){
+	dialog.showOpenDialog((files) => {
+		if (files === undefined){
+			console.log("No file selected!");
+			return;
+		}
+
+		fs.readFile(files[0], function(err,data){
+			let value = parser.parseFromString(data.toString(), "text/xml");
+			callback(value);
+		});
+
+		return fs.readFileSync(files[0], 'utf8');
+	});
+}
+
+function openXMLFileSync(){
+	dialog.showOpenDialog((files) => {
+		if (files === undefined){
+			console.log("No file selected!");
+			return;
+		}
+
+		let buffer = fs.readFileSync(files[0], 'utf8');
+		return parser.parseFromString(buffer.toString(), "text/xml");
+	});
+}
+
+//----------TABLE----------
 function formatDate(text){
 	let spIndex = text.indexOf(" ");
 	let day = text.substring(0, spIndex);

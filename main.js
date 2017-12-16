@@ -4,35 +4,40 @@ const path = require('path');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
-let scheduleWindow;
-let addWindow;
 let menu;
+let scheduleWindow;
+let wizard;
+
+let addWindow;
+
+
+//Global variables
+global.xmlfile = {contents: null};
 
 //Listen for app ready
 app.on('ready', function () {
 	createMenu();
 });
 
-ipcMain.on('file:loaded', function(){
+ipcMain.on('open-schedule', function(){
+	console.log("Opening schedule...");
 	createScheduleWindow();
-	menu.close();
 });
 
-ipcMain.on('open', function(){
-	testWindow();
+ipcMain.on('open-wizard', function(){
+	console.log("Opening wizard...");
+	createWizard();
+});
+
+ipcMain.on('show', function(){
+	console.log("Schedule data loaded: Showing...");
+	scheduleWindow.show();
+	menu.close();
 });
 
 ipcMain.on('print', function(event, arg){
 	console.log(arg);
 });
-
-let test;
-function testWindow(){
-	test = new BrowserWindow({
-		width: 500,
-		height: 600
-	});
-}
 
 //Generate Menu Window
 function createMenu(){
@@ -59,12 +64,29 @@ function createMenu(){
 	Menu.setApplicationMenu(mainMenu);
 }
 
+function createWizard(){
+	//Create new window
+	wizard = new BrowserWindow({
+		width: 1100,
+		height: 750,
+		show: false
+	});
+
+	//Load HTML into window
+	wizard.loadURL(url.format({
+		pathname: path.join(__dirname, 'Wizard/wizard.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
+}
+
 //Generate schedule window
 function createScheduleWindow(){
 	//Create new window
 	scheduleWindow = new BrowserWindow({
 		width: 1100,
-		height: 750
+		height: 750,
+		show: false
 	});
 
 	//Load HTML into window
