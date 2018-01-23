@@ -69,10 +69,12 @@ function formatDate(text){
 	return [day, rest];
 }
 
+//Get index of a child object
 function getChildIndexOf(child){
 	return [].indexOf.call(child.parentNode.children, child);
 }
 
+//Time table creation
 function createTimeTable(file){
 	let table = document.getElementById("time_table");
 	let tableHead = document.createElement('thead');
@@ -95,10 +97,8 @@ function createTimeTable(file){
 
 			//Setup first row
 			if(row === 0){
-				if(col < 2) // Spacing
-					cell.appendChild(document.createTextNode(""));
-				else // Day #
-					cell.appendChild(document.createTextNode("Day " + (col - 1)))
+				let label = (col < 2) ? "" :  ("Day " + (col - 1));
+				cell.appendChild(document.createTextNode(label));
 			}
 
 			//Setup second row
@@ -136,13 +136,11 @@ function createTimeTable(file){
 
 							//Check if rowSpan is needed in period nodes
 							let tlength = parentPeriod.getElementsByTagName("time").length;
-							if(tlength > 1)
-								cell.rowSpan = tlength;
+							if(tlength > 1) cell.rowSpan = tlength;
 						}
 						//Filling if rowSpan exists
-						else {
+						else
 							cell.setAttribute("class", "filler");
-						}
 						break;
 					//Time
 					case 1:
@@ -226,4 +224,8 @@ function createStudentList(file){
 	}
 
 	table.appendChild(body);
+}
+
+function addButtons(){
+
 }

@@ -43,7 +43,12 @@ ipcMain.on('print', function(event, arg){
 function createMenu(){
 	menu = new BrowserWindow({
 		width: 400,
-		height: 400
+		height: 400,
+		minWidth: 400,
+		minHeight: 400,
+		maxWidth: 400,
+		maxHeight: 400,
+		titleBarStyle: 'hidden'
 	});
 
 	menu.loadURL(url.format({
@@ -132,9 +137,10 @@ ipcMain.on('item:add',function(e, item){
     addWindow.close();
 });
 
-//Create menu function
+//const name = app.getName();
 const mainMenuTemplate = [
     { //Electron
+	    label: "Scheduler",
         submenu:[
             {
                 label: 'Quit',
@@ -175,6 +181,49 @@ const mainMenuTemplate = [
             }
         ]
     },
+	{
+		label: 'Table',
+		submenu: [
+			{
+				label: 'Add Day',
+				click(){
+					//Something
+				}
+			},
+			{
+				label: 'Remove Day',
+				click(){
+					//Something
+				}
+			},
+			{type: 'separator'},
+			{
+				label: 'Add Period',
+				click(){
+					//Something
+				}
+			},
+			{
+				label: 'Remove Period',
+				click(){
+					//Something
+				}
+			},
+			{type: 'separator'},
+			{
+				label: 'Add Time',
+				click(){
+					//Something
+				}
+			},
+			{
+				label: 'Remove Time',
+				click(){
+					//Something
+				}
+			}
+		]
+	},
     { //Help
         label:'Help',
         submenu:[
